@@ -18,7 +18,5 @@ class demoControllerTest {
         int c = a + b;
 
         assertEquals(15, c);
-
     }
-
 }
