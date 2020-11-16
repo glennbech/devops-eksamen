@@ -1,1 +1,6 @@
 language: java
+services:
+  - docker
+script: bash shell.sh
+env:
+  global:
