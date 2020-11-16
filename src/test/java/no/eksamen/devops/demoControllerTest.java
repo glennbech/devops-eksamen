@@ -18,12 +18,5 @@ class demoControllerTest {
         int c = a + b;
 
         assertEquals(15, c);
-    }  @Test
-    public void simpleTest2() {
-        int a = 100;
-        int b = 100;
-        int c = a + b;
-
-        assertEquals(200, c);
     }
 }
