@@ -76,7 +76,6 @@
         </dependency>
 
         <!-- Micrometer Metrics -->
-
         <dependency>
             <groupId>io.micrometer</groupId>
             <artifactId>micrometer-registry-influx</artifactId>
