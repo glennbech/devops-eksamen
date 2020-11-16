@@ -3,6 +3,7 @@ services:
   - docker
 
 before_install:
+  - openssl aes-256-cbc -K $encrypted_08046dc9db46_key -iv $encrypted_08046dc9db46_iv -in GCP-key.json.enc -out GCP-key.json -d
   - curl https://sdk.cloud.google.com | bash > /dev/null
   - source "$HOME/google-cloud-sdk/path.bash.inc"
   - gcloud auth configure-docker
