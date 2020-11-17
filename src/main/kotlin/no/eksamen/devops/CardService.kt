@@ -1,16 +1,17 @@
 package no.eksamen.devops
 
-import org.slf4j.LoggerFactory
-import org.springframework.stereotype.Service
-import no.eksamen.devops.cards.dto.Rarity
 import no.eksamen.devops.model.Card
+import no.eksamen.devops.cards.dto.Rarity
 import no.eksamen.devops.model.Collection
-import javax.annotation.PostConstruct
+
 import kotlin.random.Random
+import org.slf4j.LoggerFactory
+import javax.annotation.PostConstruct
+import org.springframework.stereotype.Service
 
 
 @Service
-class CardService {
+open class CardService {
 
     companion object{
         private val log = LoggerFactory.getLogger(CardService::class.java)
@@ -36,7 +37,7 @@ class CardService {
 
     fun isInitialized() = cardCollection.isNotEmpty()
 
-    protected fun fetchData(){
+    protected open fun fetchData(){
         //TODO
     }
 
@@ -54,7 +55,7 @@ class CardService {
     fun millValue(cardId: String) : Int {
         verifyCollection()
         val card : Card = cardCollection.find { it.cardId  == cardId} ?:
-            throw IllegalArgumentException("Invalid cardId $cardId")
+        throw IllegalArgumentException("Invalid cardId $cardId")
 
         return collection!!.millValues[card.rarity]!!
     }
@@ -62,7 +63,7 @@ class CardService {
     fun price(cardId: String) : Int {
         verifyCollection()
         val card : Card = cardCollection.find { it.cardId  == cardId} ?:
-                throw IllegalArgumentException("Invalid cardId $cardId")
+        throw IllegalArgumentException("Invalid cardId $cardId")
 
         return collection!!.prices[card.rarity]!!
     }

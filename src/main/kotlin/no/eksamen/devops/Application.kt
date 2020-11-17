@@ -10,11 +10,10 @@ import springfox.documentation.spi.DocumentationType
 import springfox.documentation.spring.web.plugins.Docket
 
 
-// added Open to class for remove the red line ** fix it later
 @SpringBootApplication
-open class Application{
+class Application{
     @Bean
-    open fun swaggerApi(): Docket {
+    fun swaggerApi(): Docket {
         return Docket(DocumentationType.OAS_30)
                 .apiInfo(apiInfo())
                 .select()

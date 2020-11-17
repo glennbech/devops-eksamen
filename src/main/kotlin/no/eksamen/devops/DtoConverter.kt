@@ -5,7 +5,6 @@ import no.eksamen.devops.db.User
 import no.eksamen.devops.dto.CardCopyDto
 import no.eksamen.devops.dto.UserDto
 
-
 object DtoConverter {
 
     fun transform(user: User) : UserDto {

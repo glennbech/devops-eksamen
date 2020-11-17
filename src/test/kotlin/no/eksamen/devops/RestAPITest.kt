@@ -1,8 +1,8 @@
 package no.eksamen.devops
 
+
 import io.restassured.RestAssured
 import io.restassured.RestAssured.given
-
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
@@ -15,9 +15,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension
 
 import no.eksamen.devops.db.UserRepository
 import no.eksamen.devops.db.UserService
-
 import javax.annotation.PostConstruct
-
 
 @ActiveProfiles("test")
 @ExtendWith(SpringExtension::class)
@@ -51,7 +49,7 @@ internal class RestAPITest {
     @Test
     fun testGetUser(){
 
-        val id = "foo"
+        val id = "devops"
         userService.registerNewUser(id)
 
         given().get("/$id")
@@ -61,7 +59,7 @@ internal class RestAPITest {
 
     @Test
     fun testCreateUser() {
-        val id = "foo"
+        val id = "devops"
 
         given().put("/$id")
                 .then()
@@ -69,4 +67,5 @@ internal class RestAPITest {
 
         assertTrue(userRepository.existsById(id))
     }
+
 }
