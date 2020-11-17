@@ -161,11 +161,13 @@
                     </compilerPlugins>
                 </configuration>
                 <dependencies>
+
                     <dependency>
                         <groupId>org.jetbrains.kotlin</groupId>
                         <artifactId>kotlin-maven-allopen</artifactId>
                         <version>${version.kotlin}</version>
                     </dependency>
+
                     <dependency>
                         <groupId>org.jetbrains.kotlin</groupId>
                         <artifactId>kotlin-maven-noarg</artifactId>
@@ -210,8 +212,6 @@
                     <target>1.8</target>
                 </configuration>
             </plugin>
-
         </plugins>
     </build>
-
 </project>
