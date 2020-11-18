@@ -15,6 +15,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension
 
 import no.eksamen.devops.db.UserRepository
 import no.eksamen.devops.db.UserService
+import org.junit.jupiter.api.Assertions
 import javax.annotation.PostConstruct
 
 @ActiveProfiles("test")
@@ -40,14 +41,16 @@ internal class RestAPITest {
         RestAssured.enableLoggingOfRequestAndResponseIfValidationFails()
     }
 
-
     @BeforeEach
     fun initTest() {
         userRepository.deleteAll()
     }
 
+
+
+
     @Test
-    fun testGetUser(){
+    fun testGetUser() {
 
         val id = "devops"
         userService.registerNewUser(id)
@@ -67,5 +70,4 @@ internal class RestAPITest {
 
         assertTrue(userRepository.existsById(id))
     }
-
 }
