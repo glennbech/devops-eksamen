@@ -18,56 +18,56 @@ import no.eksamen.devops.db.UserService
 import org.junit.jupiter.api.Assertions
 import javax.annotation.PostConstruct
 
-@ActiveProfiles("test")
-@ExtendWith(SpringExtension::class)
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-internal class RestAPITest {
-
-    @LocalServerPort
-    protected var port = 0
-
-    @Autowired
-    private lateinit var userService: UserService
-
-    @Autowired
-    private lateinit var userRepository: UserRepository
-
-
-    @PostConstruct
-    fun init() {
-        RestAssured.baseURI = "http://localhost"
-        RestAssured.port = port
-        RestAssured.basePath = "/api/user-collections"
-        RestAssured.enableLoggingOfRequestAndResponseIfValidationFails()
-    }
-
-    @BeforeEach
-    fun initTest() {
-        userRepository.deleteAll()
-    }
-
-
-
-
-    @Test
-    fun testGetUser() {
-
-        val id = "devops"
-        userService.registerNewUser(id)
-
-        given().get("/$id")
-                .then()
-                .statusCode(200)
-    }
-
-    @Test
-    fun testCreateUser() {
-        val id = "devops"
-
-        given().put("/$id")
-                .then()
-                .statusCode(201)
-
-        assertTrue(userRepository.existsById(id))
-    }
-}
+//@ActiveProfiles("test")
+//@ExtendWith(SpringExtension::class)
+//@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+//internal class RestAPITest {
+//
+//    @LocalServerPort
+//    protected var port = 0
+//
+//    @Autowired
+//    private lateinit var userService: UserService
+//
+//    @Autowired
+//    private lateinit var userRepository: UserRepository
+//
+//
+//    @PostConstruct
+//    fun init() {
+//        RestAssured.baseURI = "http://localhost"
+//        RestAssured.port = port
+//        RestAssured.basePath = "/api/user-collections"
+//        RestAssured.enableLoggingOfRequestAndResponseIfValidationFails()
+//    }
+//
+//    @BeforeEach
+//    fun initTest() {
+//        userRepository.deleteAll()
+//    }
+//
+//
+//
+//
+//    @Test
+//    fun testGetUser() {
+//
+//        val id = "devops"
+//        userService.registerNewUser(id)
+//
+//        given().get("/$id")
+//                .then()
+//                .statusCode(200)
+//    }
+//
+//    @Test
+//    fun testCreateUser() {
+//        val id = "devops"
+//
+//        given().put("/$id")
+//                .then()
+//                .statusCode(201)
+//
+//        assertTrue(userRepository.existsById(id))
+//    }
+//}

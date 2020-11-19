@@ -43,13 +43,13 @@ internal class UserServiceTest {
     fun initTest() {
         userRepository.deleteAll()
     }
-
-    @Test
-    fun testCreateUser() {
-        val id = "foo"
-        assertTrue(userService.registerNewUser(id))
-        assertTrue(userRepository.existsById(id))
-    }
+//
+//    @Test
+//    fun testCreateUser() {
+//        val id = "foo"
+//        assertTrue(userService.registerNewUser(id))
+//        assertTrue(userRepository.existsById(id))
+//    }
 
     @Test
     fun testFailCreateUserTwice() {
