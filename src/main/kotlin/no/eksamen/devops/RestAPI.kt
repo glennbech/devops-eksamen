@@ -2,12 +2,17 @@ package no.eksamen.devops
 
 import io.swagger.annotations.Api
 import io.swagger.annotations.ApiOperation
-import no.eksamen.devops.DtoConverter
+
+import io.micrometer.core.instrument.MeterRegistry
+import io.micrometer.core.instrument.Metrics
+
 import org.springframework.http.MediaType
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
-import no.eksamen.devops.db.UserService
+
 import no.eksamen.devops.dto.UserDto
+import no.eksamen.devops.DtoConverter
+import no.eksamen.devops.db.UserService
 
 @Api(value = "/api/user-collections", description = "Operations on card collections owned by users")
 @RequestMapping(
@@ -16,6 +21,9 @@ import no.eksamen.devops.dto.UserDto
 )
 @RestController
 class RestAPI(
+
+//        private val MeterRegistry meterRegistry,
+
         private val userService: UserService
 ) {
 
