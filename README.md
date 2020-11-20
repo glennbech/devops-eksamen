@@ -51,7 +51,7 @@ Velg database "mydb". Resten av verdiene kan være uendret.
 
 Instrumenter Spring Boot applikasjonen din med MicroMeter
 Det er nå på tide å få noe metrics inn i InfluxDB og visualisere med Grafana.
-
+ 
 I grove trekk kan dette gjøres ved å legge til de riktige avhengighetene til prosjeketet, og la Spring Boot plukke disse opp med autokonfigurasjon. Micrometer rammeverket kommer som en transitiv avhengighet med Spring Boot Actuator. Så, disse to linjene i build.gradle er det som skal til
 
     <dependency>
