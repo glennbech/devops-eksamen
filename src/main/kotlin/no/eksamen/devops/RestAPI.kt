@@ -22,7 +22,6 @@ import no.eksamen.devops.db.UserService
 @RestController
 class RestAPI(
 
-//        private val MeterRegistry meterRegistry,
 
         private val userService: UserService
 ) {
