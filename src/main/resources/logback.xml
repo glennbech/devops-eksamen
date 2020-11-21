@@ -3,8 +3,8 @@
     <!-- Use shutdownHook so that we can close gracefully and finish the log drain -->
     <shutdownHook class="ch.qos.logback.core.hook.DelayingShutdownHook"/>
     <appender name="LOGZIO" class="io.logz.logback.LogzioLogbackAppender">
-        <token>${LOGZ_TOKEN}</token>
-        <logzioUrl>https://listener.logz.io:8071</logzioUrl>
+        <token>$LOGZ-TOKEN</token>
+        <logzioUrl>LOGZ-URL</logzioUrl>
         <logzioType>myType</logzioType>
         <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
             <level>INFO</level>

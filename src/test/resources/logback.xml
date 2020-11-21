@@ -1,0 +1,13 @@
+<!-- Use debug=true here if you want to see output from the appender itself -->
+<configuration>     <!-- Use shutdownHook so that we can close gracefully and finish the log drain -->
+    <shutdownHook class="ch.qos.logback.core.hook.DelayingShutdownHook"/>
+    <appender name="STDOUT"
+              class="ch.qos.logback.core.ConsoleAppender">         <!-- encoders are assigned the type ch.qos.logback.classwic.encoder.PatternLayoutEncoder by default -->
+        <encoder>
+            <pattern>%-4relative [%thread] %-5level %logger{35} - %msg %n</pattern>
+        </encoder>
+    </appender>
+    <root level="info">
+        <appender-ref ref="STDOUT"/>
+    </root>
+</configuration>
