@@ -40,8 +40,11 @@ class RestAPI(
     fun getUserInfo(
             @PathVariable("userId") userId: String
     ) : ResponseEntity<UserDto>{
+
         logger?.info("Get user information. path = /userId")
+
         val user = userService.findByIdEager(userId)
+
         if(user == null){
             return ResponseEntity.notFound().build()
         }
@@ -53,8 +56,11 @@ class RestAPI(
     fun createUser(
             @PathVariable("userId") userId: String
     ): ResponseEntity<Void>{
+
         logger?.info("Create user. path = /userId")
+
         val ok = userService.registerNewUser(userId)
+
         return if(!ok) ResponseEntity.status(400).build()
             else ResponseEntity.status(201).build()
     }
