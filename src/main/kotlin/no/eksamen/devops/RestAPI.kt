@@ -45,6 +45,7 @@ class RestAPI(
         val user = userService.findByIdEager(userId)
 
         if(user == null){
+            logger.warn("user equals null")
             return ResponseEntity.notFound().build()
         }
         return ResponseEntity.status(200).body(DtoConverter.transform(user))
@@ -60,7 +61,11 @@ class RestAPI(
 
         val ok = userService.registerNewUser(userId)
 
-        return if(!ok) ResponseEntity.status(400).build()
+        return if(!ok){
+
+            logger.warn("error while created a new user")
+            return ResponseEntity.status(400).build()
+        }
             else ResponseEntity.status(201).build()
     }
 }
