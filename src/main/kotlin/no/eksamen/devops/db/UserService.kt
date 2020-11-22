@@ -8,15 +8,16 @@ import org.springframework.stereotype.Repository
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 import no.eksamen.devops.CardService
+import org.slf4j.LoggerFactory
 import javax.persistence.LockModeType
 
 
 @Repository
-interface UserRepository : CrudRepository<User, String>{
+interface UserRepository : CrudRepository<User, String> {
 
     @Lock(LockModeType.PESSIMISTIC_WRITE)
     @Query("select u from User u where u.userId = :id")
-    fun lockedFind(@Param("id") userId: String) : User?
+    fun lockedFind(@Param("id") userId: String): User?
 
 }
 
@@ -28,29 +29,52 @@ class UserService(
         private val cardService: CardService
 ) {
 
-    companion object{
+    companion object {
         const val CARDS_PER_PACK = 5
     }
 
-    fun findByIdEager(userId: String) : User?{
+    private val logger = LoggerFactory.getLogger(this::class.java)
+
+    fun findByIdEager(userId: String): User? {
 
         val user = userRepository.findById(userId).orElse(null)
-        if(user != null){
+        if (user != null) {
             user.ownedCards.size
         }
         return user
     }
 
-    fun registerNewUser(userId: String) : Boolean{
+    fun registerNewUser(userId: String): Boolean {
 
-        if(userRepository.existsById(userId)){
+        if (userRepository.existsById(userId)) {
             return false
+        }
+
+
+        val user = User()
+        user.userId = userId
+        user.role = "user"
+        user.cardPacks = 3
+        user.coins = 100
+        userRepository.save(user)
+        return true
+    }
+
+    fun registerNewCustomUser(userId: String, role: String, coins: Int, cardPack: Int): Boolean {
+
+        if (userRepository.existsById(userId)) {
+            return false
+        }
+        if (role == "user" && coins > 500) {
+
+            logger.warn("Role:user:$userId was created with:$coins need to validate creation")
         }
 
         val user = User()
         user.userId = userId
-        user.cardPacks = 3
-        user.coins = 100
+        user.role = role
+        user.coins = coins
+        user.cardPacks = cardPack
         userRepository.save(user)
         return true
     }
@@ -107,7 +131,7 @@ class UserService(
         val user = userRepository.lockedFind(userId)!!
 
         val copy = user.ownedCards.find { it.cardId == cardId }
-        if(copy == null || copy.numberOfCopies == 0){
+        if (copy == null || copy.numberOfCopies == 0) {
             throw IllegalArgumentException("User $userId does not own a copy of $cardId")
         }
 
@@ -117,13 +141,13 @@ class UserService(
         user.coins += millValue
     }
 
-    fun openPack(userId: String) : List<String> {
+    fun openPack(userId: String): List<String> {
 
         validateUser(userId)
 
         val user = userRepository.lockedFind(userId)!!
 
-        if(user.cardPacks < 1){
+        if (user.cardPacks < 1) {
             throw IllegalArgumentException("No pack to open")
         }
 

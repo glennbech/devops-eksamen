@@ -3,6 +3,7 @@ package no.eksamen.devops.db
 import javax.persistence.*
 import javax.validation.constraints.Min
 import javax.validation.constraints.NotBlank
+import javax.validation.constraints.NotNull
 
 @Entity
 @Table(name="user_data")
@@ -11,6 +12,10 @@ class User(
     @get:Id
     @get:NotBlank
     var userId: String? = null,
+
+    @get:NotNull
+    @get:NotBlank
+    var role: String? = null,
 
     @get:Min(0)
     var coins: Int = 0,

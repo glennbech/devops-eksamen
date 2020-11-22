@@ -9,6 +9,9 @@ data class UserDto(
         @get:ApiModelProperty("The id of the user")
         var userId: String? = null,
 
+        @get:ApiModelProperty("The role of the user")
+        var role: String? = null,
+
         @get:ApiModelProperty("The amount of coins owned by the user")
         var coins: Int? = null,
 
