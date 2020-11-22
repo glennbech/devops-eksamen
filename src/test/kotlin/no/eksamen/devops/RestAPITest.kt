@@ -46,9 +46,6 @@ internal class RestAPITest {
         userRepository.deleteAll()
     }
 
-
-
-
     @Test
     fun testGetUser() {
 
