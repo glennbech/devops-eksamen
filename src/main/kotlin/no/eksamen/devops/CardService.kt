@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service
 open class CardService {
 
     companion object{
-        private val log = LoggerFactory.getLogger(CardService::class.java)
+//        private val log = LoggerFactory.getLogger(CardService::class.java)
     }
 
     protected var collection: Collection? = null
