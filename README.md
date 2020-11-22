@@ -39,6 +39,8 @@
     
     travis encrypt --pro LOGZ_TOKEN=<Logz.io token til bruker> --add
     travis encrypt --pro LOGZ_URL=<Logz.io URL for Logz.io> --add
+    
+    
 Verdiene for `LOGZ_TOKEN` OG `LOGZ_URL` kan du finne inne på: 
 `Logz.io` -> `Send your data` -> `Libraries` -> `Java - logback appender`
 
