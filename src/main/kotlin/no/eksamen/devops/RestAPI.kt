@@ -40,12 +40,12 @@ class RestAPI(
             @PathVariable("userId") userId: String
     ) : ResponseEntity<UserDto>{
 
-        logger.info("Get user information. path = /userId")
+        logger.info("Get $userId's information. ")
 
         val user = userService.findByIdEager(userId)
 
         if(user == null){
-            logger.warn("user equals null")
+            logger.warn("Error: tried to get $userId information ")
             return ResponseEntity.notFound().build()
         }
         return ResponseEntity.status(200).body(DtoConverter.transform(user))
@@ -57,15 +57,15 @@ class RestAPI(
             @PathVariable("userId") userId: String
     ): ResponseEntity<Void>{
 
-        logger.info("Create user. path = /userId")
-
         val ok = userService.registerNewUser(userId)
 
         return if(!ok){
 
             logger.warn("error while created a new user")
             return ResponseEntity.status(400).build()
+        } else{
+            logger.info("Successfully creating user: $userId")
+            ResponseEntity.status(201).build()
         }
-            else ResponseEntity.status(201).build()
     }
 }
