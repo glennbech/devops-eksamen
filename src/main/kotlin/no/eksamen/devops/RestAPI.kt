@@ -32,7 +32,7 @@ class RestAPI(
 //    @Autowired
 //    private lateinit var registry: MeterRegistry
 
-    private val logger = LoggerFactory.getLogger(this::class.java)
+//    private val logger = LoggerFactory.getLogger(this::class.java)
 
     @ApiOperation("Retrieve card collection information for a specific user")
     @GetMapping(path = ["/{userId}"])
@@ -40,7 +40,7 @@ class RestAPI(
             @PathVariable("userId") userId: String
     ) : ResponseEntity<UserDto>{
 
-        logger.info("Get user information. path = /userId")
+//        logger.info("Get user information. path = /userId")
 
         val user = userService.findByIdEager(userId)
 
@@ -56,7 +56,7 @@ class RestAPI(
             @PathVariable("userId") userId: String
     ): ResponseEntity<Void>{
 
-        logger.info("Create user. path = /userId")
+//        logger.info("Create user. path = /userId")
 
         val ok = userService.registerNewUser(userId)
 
