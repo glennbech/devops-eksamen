@@ -70,7 +70,7 @@ class RestAPI(
     }
 
     @ApiOperation("Create a new user, with the given id")
-    @PutMapping(path = ["/userId"])
+    @PutMapping(path = ["/user"])
 
     fun createUser2(userId: String): ResponseEntity<Void>{
 
