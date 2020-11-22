@@ -15,9 +15,6 @@ import no.eksamen.devops.db.UserService
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
 
-import java.util.List;
-import java.util.logging.Logger;
-
 @Api(value = "/api/user-collections", description = "Operations on card collections owned by users")
 @RequestMapping(
         path = ["/api/user-collections"],
