@@ -11,7 +11,6 @@ import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 
 import no.eksamen.devops.dto.UserDto
-import no.eksamen.devops.DtoConverter
 import no.eksamen.devops.db.UserService
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
@@ -30,8 +29,8 @@ class RestAPI(
         private val userService: UserService
 ) {
 
-    @Autowired
-    private lateinit var registry: MeterRegistry
+//    @Autowired
+//    private lateinit var registry: MeterRegistry
 
     private val logger = LoggerFactory.getLogger(this::class.java)
 
@@ -41,7 +40,7 @@ class RestAPI(
             @PathVariable("userId") userId: String
     ) : ResponseEntity<UserDto>{
 
-        logger?.info("Get user information. path = /userId")
+        logger.info("Get user information. path = /userId")
 
         val user = userService.findByIdEager(userId)
 
@@ -57,7 +56,7 @@ class RestAPI(
             @PathVariable("userId") userId: String
     ): ResponseEntity<Void>{
 
-        logger?.info("Create user. path = /userId")
+        logger.info("Create user. path = /userId")
 
         val ok = userService.registerNewUser(userId)
 
