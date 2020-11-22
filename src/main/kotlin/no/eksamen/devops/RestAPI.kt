@@ -68,4 +68,21 @@ class RestAPI(
         }
             else ResponseEntity.status(201).build()
     }
+
+    @ApiOperation("Create a new user, with the given id")
+    @PutMapping(path = ["/userId"])
+
+    fun createUser2(userId: String): ResponseEntity<Void>{
+
+        logger.info("Create user. path = /userId")
+
+        val ok = userService.registerNewUser(userId)
+
+        return if(!ok){
+
+            logger.warn("error while created a new user")
+            return ResponseEntity.status(400).build()
+        }
+            else ResponseEntity.status(201).build()
+    }
 }
