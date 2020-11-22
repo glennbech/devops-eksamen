@@ -61,7 +61,7 @@ internal class RestAPITest {
     fun testCreateUser() {
         val id = "devops"
 
-        given().put("/$id")
+        given().post("/$id")
                 .then()
                 .statusCode(201)
 
