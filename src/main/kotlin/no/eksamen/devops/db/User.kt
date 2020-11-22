@@ -18,7 +18,7 @@ class User(
     var role: String? = null,
 
     @get:Min(0)
-    var coins: Int = 0,
+    var coins: Double = 0.00,
 
     @get:Min(0)
     var cardPacks: Int = 0,

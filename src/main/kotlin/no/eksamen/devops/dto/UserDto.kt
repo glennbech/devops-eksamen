@@ -13,7 +13,7 @@ data class UserDto(
         var role: String? = null,
 
         @get:ApiModelProperty("The amount of coins owned by the user")
-        var coins: Int? = null,
+        var coins: Double? = null,
 
         @get:ApiModelProperty("The number of un-opened card packs the user owns")
         var cardPacks: Int? = null,

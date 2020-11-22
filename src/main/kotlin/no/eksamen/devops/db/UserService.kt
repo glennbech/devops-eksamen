@@ -1,5 +1,7 @@
 package no.eksamen.devops.db
 
+import io.micrometer.core.instrument.Counter
+import io.micrometer.core.instrument.MeterRegistry
 import org.springframework.data.jpa.repository.Lock
 import org.springframework.data.jpa.repository.Query
 import org.springframework.data.repository.CrudRepository
@@ -9,7 +11,9 @@ import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 import no.eksamen.devops.CardService
 import org.slf4j.LoggerFactory
+import org.springframework.beans.factory.annotation.Autowired
 import javax.persistence.LockModeType
+import kotlin.concurrent.thread
 
 
 @Repository
@@ -33,7 +37,11 @@ class UserService(
         const val CARDS_PER_PACK = 5
     }
 
+    @Autowired
+    private lateinit var meterRegistry: MeterRegistry
+
     private val logger = LoggerFactory.getLogger(this::class.java)
+
 
     fun findByIdEager(userId: String): User? {
 
@@ -43,6 +51,7 @@ class UserService(
         }
         return user
     }
+
 
     fun registerNewUser(userId: String): Boolean {
 
@@ -55,12 +64,12 @@ class UserService(
         user.userId = userId
         user.role = "user"
         user.cardPacks = 3
-        user.coins = 100
+        user.coins = 100.0
         userRepository.save(user)
         return true
     }
 
-    fun registerNewCustomUser(userId: String, role: String, coins: Int, cardPack: Int): Boolean {
+    fun registerNewCustomUser(userId: String, role: String, coins: Double, cardPack: Int): Boolean {
 
         if (userRepository.existsById(userId)) {
             return false
@@ -77,6 +86,49 @@ class UserService(
         user.cardPacks = cardPack
         userRepository.save(user)
         return true
+    }
+
+    fun createDummyUsers(){
+
+        for (x in 1 .. 15){
+
+             Thread.sleep(1200)
+            val user = User()
+            user.userId = "devops$x"
+            user.role = "user"
+            user.coins = x.toDouble()*100
+            user.cardPacks = 0 + x
+
+            logger.info("Successfully created dummyData $x")
+
+            val counter: Counter = meterRegistry.counter("my.counter")
+            counter.increment(user.coins)
+
+            userRepository.save(user)
+        }
+        simulateActiveUser()
+    }
+
+    // this function will take 30 seconds after createDummy's 18 seconds
+    fun simulateActiveUser(){
+
+        val user = User()
+        user.userId = "testDummy"
+        user.role = "user"
+        user.coins = 1337.42
+        user.cardPacks = 5
+        logger.info("Simulate Active User")
+
+        for (x in 1..30){
+
+            Thread.sleep(1000)
+            val randomDouble = (-1000..2000).random()
+
+            user.coins =+ randomDouble.toDouble()
+            val counter: Counter = meterRegistry.counter("my.counter")
+            counter.increment(user.coins)
+            logger.info("Simulate coins: ${user.coins}")
+        }
     }
 
     private fun validateCard(cardId: String) {
