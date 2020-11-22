@@ -37,8 +37,7 @@
 * Andre hemmeligheter:
 
     
-    travis encrypt --pro LOGZ_TOKEN=<Logz.io token til bruker> --add
-    
+    travis encrypt --pro LOGZ_TOKEN=<Logz.io token til bruker> --add              
     travis encrypt --pro LOGZ_URL=<Logz.io URL for Logz.io> --add
     
     
