@@ -7,7 +7,7 @@ env:
   - IMAGE=gcr.io/terraform-292215/devops-eksamen-10002
   - CLOUDSDK_CORE_DISABLE_PROMPTS=1
 before_install:
-- openssl aes-256-cbc -K $encrypted_add0310c1099_key -iv $encrypted_add0310c1099_iv
+- openssl aes-256-cbc -K $encrypted_08046dc9db46_key -iv $encrypted_08046dc9db46_iv
   -in GCP-key.json.enc -out GCP-key.json -d
 - curl https://sdk.cloud.google.com | bash > /dev/null
 - source "$HOME/google-cloud-sdk/path.bash.inc"
