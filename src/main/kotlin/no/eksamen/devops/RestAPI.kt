@@ -33,9 +33,7 @@ class RestAPI(
     @Autowired
     private lateinit var meterRegistry: MeterRegistry
 
-
     private val logger = LoggerFactory.getLogger(this::class.java)
-
 
     @ApiOperation("Retrieve card collection information for a specific user")
     @GetMapping(path = ["/{userId}"])
@@ -54,7 +52,6 @@ class RestAPI(
         }
 
         return ResponseEntity.status(200).body(DtoConverter.transform(user))
-
     }
 
     @ApiOperation("Create a new user, with the given id")
